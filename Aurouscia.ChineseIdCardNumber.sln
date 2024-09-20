@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurouscia.ChineseIdCardNumber", "Aurouscia.ChineseIdCardNumber\Aurouscia.ChineseIdCardNumber.csproj", "{4719B71D-455A-4CEB-8E9F-2FD5D10E8456}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurouscia.ChineseIdCardNumber.Test", "Aurouscia.ChineseIdCardNumber.Test\Aurouscia.ChineseIdCardNumber.Test.csproj", "{D02C1549-3C9D-40F3-9B5F-73A86ABEE54C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4719B71D-455A-4CEB-8E9F-2FD5D10E8456}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4719B71D-455A-4CEB-8E9F-2FD5D10E8456}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4719B71D-455A-4CEB-8E9F-2FD5D10E8456}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4719B71D-455A-4CEB-8E9F-2FD5D10E8456}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D02C1549-3C9D-40F3-9B5F-73A86ABEE54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D02C1549-3C9D-40F3-9B5F-73A86ABEE54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D02C1549-3C9D-40F3-9B5F-73A86ABEE54C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D02C1549-3C9D-40F3-9B5F-73A86ABEE54C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
