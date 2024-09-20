@@ -24,7 +24,10 @@ namespace Aurouscia.ChineseIdCardNumber
             var areaSpan = span.Slice(0, 6);
             int areaCode = int.Parse(areaSpan);
             var areaRes = ChinaAreaHelper.Get(areaCode);
-            if (areaRes is null || areaRes.AreaName is null)
+            if (areaRes is null 
+                || areaRes.AreaName is null
+                || areaRes.CityName is null
+                || areaRes.ProvinceName is null)
             {
                 errmsg = ErrMsg.InvalidAreaCode;
                 return null;
@@ -67,14 +70,7 @@ namespace Aurouscia.ChineseIdCardNumber
             bool isMale = serialLastDigit % 2 == 1;
 
             errmsg = null;
-            return new()
-            {
-                ProvinceName = areaRes.ProvinceName,
-                CityName = areaRes.CityName,
-                AreaName = areaRes.AreaName,
-                Birthday = birth,
-                IsMale = isMale
-            };
+            return new(areaRes.ProvinceName, areaRes.CityName, areaRes.AreaName, birth, isMale);
         }
         private readonly static char[] verifyCodeResArr = ['1','0','X','9','8','7','6','5','4','3','2'];
         private readonly static byte[] verifyMutCoeff = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
