@@ -4,7 +4,26 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Version>0.0.0</Version>
+        <Authors>Aurouscia</Authors>
+        <Description>中国大陆地区身份证号验证与信息提取</Description>
+        <Copyright>Aurouscia</Copyright>
+        <PackageProjectUrl>https://github.com/Aurouscia/ChineseIdCardNumber</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Aurouscia/ChineseIdCardNumber</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>中国;China</PackageTags>
+        <Title>Aurouscia.ChineseIdCardNumber</Title>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="..\README.md">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="ChinaProvinceCityArea" Version="0.1.0" />
