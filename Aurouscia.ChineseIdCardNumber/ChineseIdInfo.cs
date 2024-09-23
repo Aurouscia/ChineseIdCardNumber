@@ -1,6 +1,6 @@
 namespace Aurouscia.ChineseIdCardNumber
 {
-    public class ChnIdInfo(
+    public class ChineseIdInfo(
         string provinceName, string cityName, string areaName,
         DateTime birthday, bool isMale)
     {

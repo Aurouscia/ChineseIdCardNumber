@@ -6,14 +6,15 @@
 Nuget 搜索安装 Aurouscia.ChineseIdCardNumber  
 ```
 using Aurouscia.ChineseIdCardNumber;
-var res = ChnIdHelper.Parse(身份证号, out string? 错误信息);
+var res = ChineseIdHelper.Parse(身份证号, out string? 错误信息);
 
-res : ChnIdInfo?
+res : ChineseIdInfo?
 res.ProvinceName : string
 res.CityName : string
 res.AreaName : string
 res.Birthday : DateTime
 res.IsMale : bool
+res.GetAge() : int
 ```
 解决方案内含单元测试  
 

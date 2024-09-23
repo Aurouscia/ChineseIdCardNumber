@@ -4,9 +4,9 @@ using ChinaProvinceCityArea;
 
 namespace Aurouscia.ChineseIdCardNumber
 {
-    public static class ChnIdHelper
+    public static class ChineseIdHelper
     {
-        public static ChnIdInfo? Parse(string idNumber, out string? errmsg)
+        public static ChineseIdInfo? Parse(string idNumber, out string? errmsg)
         {
             idNumber = idNumber.Trim().ToUpper();
             ReadOnlySpan<char> span = idNumber.AsSpan();

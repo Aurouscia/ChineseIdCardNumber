@@ -30,7 +30,7 @@ namespace Aurouscia.ChineseIdCardNumber.Test
         public void Common(
             string code, string birthday, bool isMale, string area)
         {
-            var res = ChnIdHelper.Parse(code, out string? errmsg);
+            var res = ChineseIdHelper.Parse(code, out string? errmsg);
             Assert.IsNotNull(res);
             Assert.IsNull(errmsg);
             Assert.AreEqual(birthday, res.Birthday.ToString("yyyy-MM-dd"));
@@ -48,7 +48,7 @@ namespace Aurouscia.ChineseIdCardNumber.Test
         [DataRow("422802197607140359", 48, DisplayName = "7.14")]
         public void AgeCalculation(string code, int expectAge)
         {
-            var info = ChnIdHelper.Parse(code, out _);
+            var info = ChineseIdHelper.Parse(code, out _);
             Assert.IsNotNull(info);
             var age = info.GetAge(testAgeAt);
             Assert.AreEqual(expectAge, age);
@@ -67,7 +67,7 @@ namespace Aurouscia.ChineseIdCardNumber.Test
         [DataRow("42010220030106081X", null)]
         public void ShouldThrow(string code, string? expectErrmsg)
         {
-            var res = ChnIdHelper.Parse(code, out string? actualErrmsg);
+            var res = ChineseIdHelper.Parse(code, out string? actualErrmsg);
             Assert.AreEqual(expectErrmsg, actualErrmsg);
             if (expectErrmsg is { })
                 Assert.IsNull(res);
