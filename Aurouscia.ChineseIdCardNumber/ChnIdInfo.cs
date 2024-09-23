@@ -9,5 +9,18 @@ namespace Aurouscia.ChineseIdCardNumber
         public string AreaName { get; set; } = areaName;
         public DateTime Birthday { get; set; } = birthday;
         public bool IsMale { get; set; } = isMale;
+        public int GetAge(DateTime? at = null)
+        {
+            DateTime now = at ?? DateTime.Now;
+            var age = now.Year - Birthday.Year;
+            if (Birthday.Month < now.Month)
+                age -= 1;
+            else if (Birthday.Month == now.Month)
+            {
+                if (Birthday.Day < now.Day)
+                    age -= 1;
+            }
+            return age;
+        }
     }
 }
