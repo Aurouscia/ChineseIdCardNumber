@@ -27,6 +27,9 @@ namespace Aurouscia.ChineseIdCardNumber.Test
         [DataRow(
             "42010220030106081X", "2003-01-06", true,
             "湖北省-武汉市-江岸区")]
+        [DataRow(
+            "231121199708302613", "1997-08-30", true,
+            "黑龙江省-黑河市-", DisplayName = "已被撤销行政区")]
         public void Common(
             string code, string birthday, bool isMale, string area)
         {
@@ -58,13 +61,11 @@ namespace Aurouscia.ChineseIdCardNumber.Test
         [DataRow("42010200000000000", ErrMsg.InvalidLength)]
         [DataRow("4201020000000000000", ErrMsg.InvalidLength)]
         [DataRow("42010200000000000A", ErrMsg.InvalidCharContained)]
-        [DataRow("880102000000000000", ErrMsg.InvalidAreaCode)]
-        [DataRow("428802000000000000", ErrMsg.InvalidAreaCode)]
-        [DataRow("420188000000000000", ErrMsg.InvalidAreaCode)]
         [DataRow("420102200313010000", ErrMsg.InvalidBirthday)]
         [DataRow("420102200312320000", ErrMsg.InvalidBirthday)]
         [DataRow("420102200301060810", ErrMsg.VerificationErr)]
-        [DataRow("42010220030106081X", null)]
+        [DataRow("42010220030106081X", null, DisplayName = "没问题")]
+        [DataRow("231121199708302613", null, DisplayName = "已被撤销行政区")]
         public void ShouldThrow(string code, string? expectErrmsg)
         {
             var res = ChineseIdHelper.Parse(code, out string? actualErrmsg);

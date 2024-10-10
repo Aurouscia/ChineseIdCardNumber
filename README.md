@@ -9,14 +9,14 @@ using Aurouscia.ChineseIdCardNumber;
 var res = ChineseIdHelper.Parse(身份证号, out string? 错误信息);
 
 res : ChineseIdInfo?
-res.ProvinceName : string
-res.CityName : string
-res.AreaName : string
+res.ProvinceName : string?
+res.CityName : string?
+res.AreaName : string?
 res.Birthday : DateTime
 res.IsMale : bool
 res.GetAge() : int
 ```
-解决方案内含单元测试  
+已被撤销的行政区划名称返回null  
 
 ## License
 MIT
