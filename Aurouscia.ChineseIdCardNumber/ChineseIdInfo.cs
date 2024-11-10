@@ -13,11 +13,11 @@ namespace Aurouscia.ChineseIdCardNumber
         {
             DateTime now = at ?? DateTime.Now;
             var age = now.Year - Birthday.Year;
-            if (Birthday.Month < now.Month)
+            if (Birthday.Month > now.Month)
                 age -= 1;
             else if (Birthday.Month == now.Month)
             {
-                if (Birthday.Day < now.Day)
+                if (Birthday.Day > now.Day)
                     age -= 1;
             }
             return age;

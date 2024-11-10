@@ -42,13 +42,13 @@ namespace Aurouscia.ChineseIdCardNumber.Test
         }
 
         private readonly static DateTime testAgeAt 
-            = new DateTime(2024, 6, 15);
+            = new DateTime(2024, 6, 15);//假设现在是这个日期
         [TestMethod]
-        [DataRow("330226197605164239", 47, DisplayName = "5.16")]
-        [DataRow("450503197606146701", 47, DisplayName = "6.14")]
-        [DataRow("130404197606152542", 48, DisplayName = "6.15")]
-        [DataRow("411622197606161643", 48, DisplayName = "6.16")]
-        [DataRow("422802197607140359", 48, DisplayName = "7.14")]
+        [DataRow("330226197605164239", 48, DisplayName = "5.16，生日已过")]
+        [DataRow("450503197606146701", 48, DisplayName = "6.14，生日已过")]
+        [DataRow("130404197606152542", 48, DisplayName = "6.15，生日当天")]
+        [DataRow("411622197606161643", 47, DisplayName = "6.16，生日未到")]
+        [DataRow("422802197607140359", 47, DisplayName = "7.14，生日未到")]
         public void AgeCalculation(string code, int expectAge)
         {
             var info = ChineseIdHelper.Parse(code, out _);
