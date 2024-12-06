@@ -2,13 +2,14 @@ namespace Aurouscia.ChineseIdCardNumber
 {
     public class ChineseIdInfo(
         string? provinceName, string? cityName, string? areaName,
-        DateTime birthday, bool isMale)
+        DateTime birthday, bool isMale, bool verifyPassed)
     {
         public string? ProvinceName { get; set; } = provinceName;
         public string? CityName { get; set; } = cityName;
         public string? AreaName { get; set; } = areaName;
         public DateTime Birthday { get; set; } = birthday;
         public bool IsMale { get; set; } = isMale;
+        public bool VerifyPassed { get; set; } = verifyPassed;
         public int GetAge(DateTime? at = null)
         {
             DateTime now = at ?? DateTime.Now;

@@ -4,7 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version>0.2.1</Version>
+        <Version>0.3.0</Version>
         <Authors>Aurouscia</Authors>
         <Description>中国大陆地区身份证号验证与信息提取</Description>
         <Copyright>Aurouscia</Copyright>

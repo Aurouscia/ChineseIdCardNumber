@@ -6,7 +6,7 @@ namespace Aurouscia.ChineseIdCardNumber
 {
     public static class ChineseIdHelper
     {
-        public static ChineseIdInfo? Parse(string idNumber, out string? errmsg)
+        public static ChineseIdInfo? Parse(string idNumber, out string? errmsg, bool looseVerify = false)
         {
             idNumber = idNumber.Trim().ToUpper();
             ReadOnlySpan<char> span = idNumber.AsSpan();
@@ -43,8 +43,12 @@ namespace Aurouscia.ChineseIdCardNumber
                 errmsg = ErrMsg.InvalidBirthday;
                 return null;
             }
-            
+
+            var serialLastDigit = span[16] - '0';
+            bool isMale = serialLastDigit % 2 == 1;
+
             //GB11643-1999标准校验码
+            bool verifyPassed = true;
             int sum = 0;
             for (int i = 0; i < 17; i++)
             {
@@ -55,15 +59,17 @@ namespace Aurouscia.ChineseIdCardNumber
             int computedCodeIdx = sum % 11;
             if (verifyCodeResArr[computedCodeIdx] != span[17])
             {
-                errmsg = ErrMsg.VerificationErr;
-                return null;
+                if (!looseVerify)
+                {
+                    errmsg = ErrMsg.VerificationErr;
+                    return null; //若不是宽松模式，返回null
+                }
+                else
+                    verifyPassed = false; //若是宽松模式，将verifyPassed设为false
             }
 
-            var serialLastDigit = span[16] - '0';
-            bool isMale = serialLastDigit % 2 == 1;
-
             errmsg = null;
-            return new(areaRes.ProvinceName, areaRes.CityName, areaRes.AreaName, birth, isMale);
+            return new(areaRes.ProvinceName, areaRes.CityName, areaRes.AreaName, birth, isMale, verifyPassed);
         }
         private readonly static char[] verifyCodeResArr = ['1','0','X','9','8','7','6','5','4','3','2'];
         private readonly static byte[] verifyMutCoeff = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];

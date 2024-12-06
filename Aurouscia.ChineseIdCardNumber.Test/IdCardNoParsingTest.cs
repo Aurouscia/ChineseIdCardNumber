@@ -75,5 +75,35 @@ namespace Aurouscia.ChineseIdCardNumber.Test
             else
                 Assert.IsNotNull(res);
         }
+
+        [TestMethod]
+        [DataRow("42010220030106081X", false, false)]
+        [DataRow("42010220030106081X", false, true)]
+        [DataRow("420102200301060810", true, false)]
+        [DataRow("420102200301060810", true, true)]
+        public void LooseVerify(string code, bool isWrong, bool looseVerify)
+        { 
+            var res = ChineseIdHelper.Parse(code, out string? errmsg, looseVerify);
+            if (isWrong)
+            {
+                if (looseVerify)
+                {
+                    Assert.IsNotNull(res);
+                    Assert.IsNull(errmsg);
+                    Assert.IsFalse(res.VerifyPassed);
+                }
+                else
+                {
+                    Assert.IsNull(res);
+                    Assert.AreEqual(ErrMsg.VerificationErr, errmsg);
+                }
+            }
+            else
+            {
+                Assert.IsNotNull(res);
+                Assert.IsNull(errmsg);
+                Assert.IsTrue(res.VerifyPassed);
+            }
+        }
     }
 }
