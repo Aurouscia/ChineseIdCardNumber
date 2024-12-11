@@ -66,6 +66,7 @@ namespace Aurouscia.ChineseIdCardNumber.Test
         [DataRow("420102200301060810", ErrMsg.VerificationErr)]
         [DataRow("42010220030106081X", null, DisplayName = "没问题")]
         [DataRow("231121199708302613", null, DisplayName = "已被撤销行政区")]
+        [DataRow("02010220030106081X", ErrMsg.InvalidAreaCode, DisplayName = "区划代码位数异常")]
         public void ShouldThrow(string code, string? expectErrmsg)
         {
             var res = ChineseIdHelper.Parse(code, out string? actualErrmsg);

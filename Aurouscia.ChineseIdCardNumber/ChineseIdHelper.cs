@@ -25,6 +25,12 @@ namespace Aurouscia.ChineseIdCardNumber
             int areaCode = int.Parse(areaSpan);
             var areaRes = ChinaAreaHelper.Get(areaCode);
             //无法获知是不是已废弃区划号码，不能因为获取不到而认为身份证号非法
+            //但如果areaRes为null，那说明位数有误（0开头），肯定有问题
+            if (areaRes is null)
+            {
+                errmsg = ErrMsg.InvalidAreaCode;
+                return null;
+            }
             
             
             var yearSpan = span.Slice(6, 4);
