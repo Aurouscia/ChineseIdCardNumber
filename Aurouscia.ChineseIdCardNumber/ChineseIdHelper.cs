@@ -12,12 +12,12 @@ namespace Aurouscia.ChineseIdCardNumber
             ReadOnlySpan<char> span = idNumber.AsSpan();
             if (span.Length != 18)
             {
-                errmsg = ErrMsg.InvalidLength;
+                errmsg = ChineseIdErrMsg.InvalidLength;
                 return null;
             }
             if (!Regex.IsMatch(idNumber, "^[0-9]{17}[0-9|X]$"))
             {
-                errmsg = ErrMsg.InvalidCharContained;
+                errmsg = ChineseIdErrMsg.InvalidCharContained;
                 return null;
             }
             
@@ -28,7 +28,7 @@ namespace Aurouscia.ChineseIdCardNumber
             //但如果areaRes为null，那说明位数有误（0开头），肯定有问题
             if (areaRes is null)
             {
-                errmsg = ErrMsg.InvalidAreaCode;
+                errmsg = ChineseIdErrMsg.InvalidAreaCode;
                 return null;
             }
             
@@ -46,7 +46,7 @@ namespace Aurouscia.ChineseIdCardNumber
             }
             catch (ArgumentOutOfRangeException)
             {
-                errmsg = ErrMsg.InvalidBirthday;
+                errmsg = ChineseIdErrMsg.InvalidBirthday;
                 return null;
             }
 
@@ -67,7 +67,7 @@ namespace Aurouscia.ChineseIdCardNumber
             {
                 if (!looseVerify)
                 {
-                    errmsg = ErrMsg.VerificationErr;
+                    errmsg = ChineseIdErrMsg.VerificationErr;
                     return null; //若不是宽松模式，返回null
                 }
                 else

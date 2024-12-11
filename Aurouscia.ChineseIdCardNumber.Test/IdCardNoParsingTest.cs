@@ -1,4 +1,5 @@
 using Aurouscia.ChineseIdCardNumber.Etc;
+using System.Reflection;
 
 namespace Aurouscia.ChineseIdCardNumber.Test
 {
@@ -58,23 +59,43 @@ namespace Aurouscia.ChineseIdCardNumber.Test
         }
 
         [TestMethod]
-        [DataRow("42010200000000000", ErrMsg.InvalidLength)]
-        [DataRow("4201020000000000000", ErrMsg.InvalidLength)]
-        [DataRow("42010200000000000A", ErrMsg.InvalidCharContained)]
-        [DataRow("420102200313010000", ErrMsg.InvalidBirthday)]
-        [DataRow("420102200312320000", ErrMsg.InvalidBirthday)]
-        [DataRow("420102200301060810", ErrMsg.VerificationErr)]
+        [DataRow("42010200000000000", nameof(ChineseIdErrMsg.InvalidLength))]
+        [DataRow("4201020000000000000", nameof(ChineseIdErrMsg.InvalidLength))]
+        [DataRow("42010200000000000A", nameof(ChineseIdErrMsg.InvalidCharContained))]
+        [DataRow("420102200313010000", nameof(ChineseIdErrMsg.InvalidBirthday))]
+        [DataRow("420102200312320000", nameof(ChineseIdErrMsg.InvalidBirthday))]
+        [DataRow("420102200301060810", nameof(ChineseIdErrMsg.VerificationErr))]
         [DataRow("42010220030106081X", null, DisplayName = "没问题")]
         [DataRow("231121199708302613", null, DisplayName = "已被撤销行政区")]
-        [DataRow("02010220030106081X", ErrMsg.InvalidAreaCode, DisplayName = "区划代码位数异常")]
-        public void ShouldThrow(string code, string? expectErrmsg)
+        [DataRow("02010220030106081X", nameof(ChineseIdErrMsg.InvalidAreaCode), DisplayName = "区划代码位数异常")]
+        public void ShouldThrow(string code, string? expectErrmsgPropName)
         {
+            string? expectErrmsg = null;
+            if (expectErrmsgPropName is { })
+            {
+                Type t = typeof(ChineseIdErrMsg);
+                var prop = t.GetProperty(expectErrmsgPropName,
+                    BindingFlags.Static | BindingFlags.Public);
+                expectErrmsg = (string?)prop?.GetValue(null);
+            }
             var res = ChineseIdHelper.Parse(code, out string? actualErrmsg);
             Assert.AreEqual(expectErrmsg, actualErrmsg);
             if (expectErrmsg is { })
                 Assert.IsNull(res);
             else
                 Assert.IsNotNull(res);
+        }
+
+        [TestMethod]
+        public void CustomErrMsg()
+        {
+            string originalErrmsg = ChineseIdErrMsg.InvalidLength;
+            string expectErrmsg = "长度不对劲";
+            ChineseIdErrMsg.InvalidLength = expectErrmsg;//自定义错误信息
+            _ = ChineseIdHelper.Parse("42", out string? actualMsg);
+            Assert.AreEqual(expectErrmsg, actualMsg);//抛出的错误信息应该是刚刚新设的
+            ChineseIdErrMsg.ResetToDefault();
+            Assert.AreEqual(originalErrmsg, ChineseIdErrMsg.InvalidLength);
         }
 
         [TestMethod]
@@ -96,7 +117,7 @@ namespace Aurouscia.ChineseIdCardNumber.Test
                 else
                 {
                     Assert.IsNull(res);
-                    Assert.AreEqual(ErrMsg.VerificationErr, errmsg);
+                    Assert.AreEqual(ChineseIdErrMsg.VerificationErr, errmsg);
                 }
             }
             else

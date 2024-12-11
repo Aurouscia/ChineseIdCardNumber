@@ -4,7 +4,7 @@
 
 ## 用法
 Nuget 搜索安装 Aurouscia.ChineseIdCardNumber  
-```
+```csharp
 using Aurouscia.ChineseIdCardNumber;
 var res = ChineseIdHelper.Parse(身份证号, out string? 错误信息);
 
@@ -17,6 +17,14 @@ res.IsMale : bool
 res.GetAge() : int
 ```
 已被撤销的行政区划名称返回null  
+
+### 自定义错误信息
+```csharp
+//设置ChineseIdErrMsg静态对象的属性值
+ChineseIdErrMsg.InvalidLength = "长度有问题"
+ChineseIdErrMsg.VerificationErr = "校验码有问题"
+ChineseIdErrMsg.xxx
+```
 
 ## License
 MIT
